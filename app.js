@@ -1,6 +1,6 @@
 const express = require("express");
 const admin = require("firebase-admin");
-const serviceAccount = require("./firebase-service-account.json");
+//const serviceAccount = require("./firebase-service-account.json");
 const cors= require('cors');
 
 const app = express();
@@ -8,11 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT ||3000;
-
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
 // Inicializar Firebase Admin
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://lexifocus-b41ff.firebaseio.com" 
 });
 admin.auth().setPersistence
 
