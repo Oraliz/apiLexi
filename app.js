@@ -73,5 +73,5 @@ app.put("/ejercicios/:id", async (req,res) =>{
 });
 
 app.listen(PORT,() => {
-    console.log("Servidor corriendo en el puerto 3000");
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
