@@ -1,9 +1,11 @@
 const express = require("express");
 const admin = require("firebase-admin");
 const serviceAccount = require("./firebase-service-account.json");
+const cors= require('cors');
 
 const app = express();
-app.use(express.json());
+app.use(cors());
+const PORT = process.env.PORT ||3000;
 
 // Inicializar Firebase Admin
 admin.initializeApp({
@@ -68,6 +70,6 @@ app.put("/ejercicios/:id", async (req,res) =>{
     }
 });
 
-app.listen(3000,() => {
+app.listen(PORT,() => {
     console.log("Servidor corriendo en el puerto 3000");
 });
