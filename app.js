@@ -12,8 +12,9 @@ const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
 // Inicializar Firebase Admin
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
+
 });
-admin.auth().setPersistence
+//admin.auth().setPersistence
 
 const db = admin.firestore(); 
 
