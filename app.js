@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT ||3000;
-const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG.replace(/\b/g, '').replace(/\r/g, ''));
 // Inicializar Firebase Admin
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 //Agregar ejercicios
-app.post("/ejercicios", async (req,res) =>{
+app.post("/addejercicios", async (req,res) =>{
     try{
         const ejercicio= req.body;
         const docRef = await db.collection("ejercicios").add(ejercicio);
@@ -39,7 +39,7 @@ app.post("/ejercicios", async (req,res) =>{
 });
 
 // Obtener usuarios
-app.get("/ejercicios",async(req,res)=>{
+app.get("/getejercicios",async(req,res)=>{
     try{
         const snapshot = await db.collection("ejercicios").get();
         const ejercicios = snapshot.docs.map(doc => ({id:doc.id, ...doc.data()}));
