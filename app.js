@@ -34,6 +34,7 @@ app.post("/addejercicios", async (req,res) =>{
             data: ejercicio
         });
     }catch(error){
+        
         res.status(500).json({error:'Error al registrar ejercicio'})
     }
 });
@@ -45,6 +46,7 @@ app.get("/getejercicios",async(req,res)=>{
         const ejercicios = snapshot.docs.map(doc => ({id:doc.id, ...doc.data()}));
         res.json(ejercicios);
     } catch (error){
+        console.error("Error en getejercicios:", error);
         res.status(500).json({error: 'Error al obtener los ejercicios'})
     }
 });
