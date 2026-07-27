@@ -21,7 +21,7 @@ const db = admin.firestore();
 
 // Ruta de prueba
 app.get("/", (req, res) => {
-    res.send("Hola apiisisi");
+    res.send("Hola");
 });
 
 // Agregar ejercicios (con URL de imagen)
