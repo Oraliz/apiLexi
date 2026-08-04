@@ -25,6 +25,24 @@ app.get("/", (req, res) => {
 });
 
 // Agregar ejercicios (con URL de imagen)
+app.post("/addrecompensas", async (req, res) => {
+    try {
+        const recompensa = req.body;
+
+        const docRef = await db.collection("Recompensas").add(recompensa);
+
+        res.status(201).json({
+            message: "registrado exitosamente",
+            id: docRef.id,
+            data: recompensa
+        });
+    } catch (error) {
+        console.error("Error al registrar:", error);
+        res.status(500).json({ error: "Error al registrar" });
+    }
+});
+
+// Agregar ejercicios (con URL de imagen)
 app.post("/addejercicios", async (req, res) => {
     try {
         const ejercicio = req.body; // aquí ya viene con la URL de la imagen
