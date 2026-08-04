@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
     res.send("Hola");
 });
 
-// Agregar ejercicios (con URL de imagen)
+// Agregar recompensa (con URL de imagen)
 app.post("/addrecompensas", async (req, res) => {
     try {
         const recompensa = req.body;
@@ -39,6 +39,20 @@ app.post("/addrecompensas", async (req, res) => {
     } catch (error) {
         console.error("Error al registrar:", error);
         res.status(500).json({ error: "Error al registrar" });
+    }
+});
+// Obtener recompensas
+app.get("/getrecompensas", async (req, res) => {
+    try {
+        const snapshot = await db.collection("Recompensas").get();
+        const recompensas = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        res.json(recompensas);
+    } catch (error) {
+        console.error("Error en getrecompensas:", error);
+        res.status(500).json({ error: "Error al obtener las recompensas" });
     }
 });
 
